@@ -1,3 +1,10 @@
 body {
     background-color: #141719;
 }
+
+div {
+    background-color: #ffb7b2;
+    border-style: solid;
+    border-color: #d7caed;
+    border-width: 4px;
+}

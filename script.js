@@ -26,3 +26,23 @@ function operate(op, a, b) {
             return divide(a, b);
     }
 }
+const calcDisplay = document.querySelector("#calc-display");
+const numSection = document.querySelector("#num-section");
+
+let displayValue = parseInt(calcDisplay.textContent);
+
+numSection.addEventListener("click", (e) => {
+    if (e.target.nodeName !== "BUTTON") {
+        return;
+    }
+
+    if (e.target.className === "num-btn") {
+        if (calcDisplay.textContent === "0") {
+            calcDisplay.textContent = e.target.textContent;
+            displayValue = parseInt(calcDisplay.textContent);
+            return;
+        }
+        calcDisplay.textContent += e.target.textContent;
+        displayValue = parseInt(calcDisplay.textContent);
+    }
+});

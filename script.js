@@ -24,14 +24,18 @@ function operate(op, a, b) {
             return multiply(a, b);
         case "/":
             return divide(a, b);
+        default:
+            return b;
     }
 }
+
 const calcDisplay = document.querySelector("#calc-display");
 const calcBtnContainer = document.querySelector("#calc-btn-container");
 
 let totalValue = 0;
 let displayValue = Number(calcDisplay.textContent);
 let clearDisplay = false;
+let opMode = "";
 
 calcBtnContainer.addEventListener("click", (e) => {
     if (e.target.nodeName !== "BUTTON") {
@@ -49,14 +53,29 @@ calcBtnContainer.addEventListener("click", (e) => {
     }
 
     if (e.target.className === "op-btn") {
+        totalValue === 0 ? totalValue = displayValue : totalValue = operate(opMode, totalValue, displayValue);
+
         if (e.target.id === "btn-add") {
-            totalValue = add(totalValue, displayValue);
+            opMode = "+";
         }
+        if (e.target.id === "btn-subtract") {
+            opMode = "-";
+        }
+        if (e.target.id === "btn-multiply") {
+            opMode = "*";
+        }
+        if (e.target.id === "btn-divide") {
+            opMode = "/";
+        }
+        if (e.target.id === "btn-equals") {
+            opMode = "=";
+        }
+
         calcDisplay.textContent = totalValue;
         clearDisplay = true;
     }
 
-    if (e.target.id === "ac-btn") {
+    if (e.target.id === "btn-ac") {
         calcDisplay.textContent = "0";
         totalValue = 0;
     }

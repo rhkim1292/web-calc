@@ -27,22 +27,39 @@ function operate(op, a, b) {
     }
 }
 const calcDisplay = document.querySelector("#calc-display");
-const numSection = document.querySelector("#num-section");
+const calcBtnContainer = document.querySelector("#calc-btn-container");
 
-let displayValue = parseInt(calcDisplay.textContent);
+let totalValue = 0;
+let displayValue = Number(calcDisplay.textContent);
+let clearDisplay = false;
 
-numSection.addEventListener("click", (e) => {
+calcBtnContainer.addEventListener("click", (e) => {
     if (e.target.nodeName !== "BUTTON") {
         return;
     }
 
     if (e.target.className === "num-btn") {
-        if (calcDisplay.textContent === "0") {
+        if (calcDisplay.textContent === "0" || clearDisplay) {
             calcDisplay.textContent = e.target.textContent;
-            displayValue = parseInt(calcDisplay.textContent);
+            displayValue = Number(calcDisplay.textContent);
+            clearDisplay = false;
             return;
         }
         calcDisplay.textContent += e.target.textContent;
-        displayValue = parseInt(calcDisplay.textContent);
     }
+
+    if (e.target.className === "op-btn") {
+        if (e.target.id === "btn-add") {
+            totalValue = add(totalValue, displayValue);
+        }
+        calcDisplay.textContent = totalValue;
+        clearDisplay = true;
+    }
+
+    if (e.target.id === "ac-btn") {
+        calcDisplay.textContent = "0";
+        totalValue = 0;
+    }
+
+    displayValue = Number(calcDisplay.textContent);
 });

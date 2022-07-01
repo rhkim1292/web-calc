@@ -1,10 +1,132 @@
-body {
-    background-color: #141719;
+:root {
+    --calc-body-padding: 10px;
+    --calc-body-width: 500px;
+    --calc-body-border-box-width: calc(
+        var(--calc-body-width) - var(--calc-body-padding) * 2
+    );
+    --calc-body-height: 650px;
+    --calc-body-border-box-height: calc(
+        var(--calc-body-height) - var(--calc-body-padding) * 2
+    );
+    --calc-display-height: 100px;
+    --btn-margin: 3px;
+    --btn-gap: 5px;
+    --horiz-btn-cnt: 4;
+    --horiz-btn-gap-cnt: calc(var(--horiz-btn-cnt) - 1);
+    --vert-btn-cnt: 5;
+    --vert-btn-gap-cnt: calc(var(--vert-btn-cnt) - 1);
+    --default-btn-width: calc(
+        (
+                var(--calc-body-border-box-width) - var(--horiz-btn-gap-cnt) *
+                    var(--btn-gap)
+            ) / var(--horiz-btn-cnt)
+    );
+
+    --default-btn-height: calc(
+        (
+                var(--calc-body-border-box-height) - var(--calc-display-height) -
+                    var(--vert-btn-gap-cnt) * var(--btn-gap)
+            ) / var(--vert-btn-cnt)
+    );
+    --tall-btn-height: calc(var(--default-btn-height) * 2 + var(--btn-gap));
+    --wide-btn-width: calc(var(--default-btn-width) * 2 + var(--btn-gap));
+    --num-section-width: calc(
+        (var(--default-btn-width) + var(--btn-gap)) * (var(--horiz-btn-cnt) - 1);
+    );
+    --op-section-width: var(--default-btn-width);
 }
 
-div {
-    background-color: #ffb7b2;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #faedff;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    width: var(--default-btn-width);
+    height: var(--default-btn-height);
+    border-radius: 5px;
+    font-size: 30px;
+}
+
+#btn-0 {
+    width: var(--wide-btn-width);
+}
+
+#btn-add {
+    height: var(--tall-btn-height);
+}
+
+#btn-equals {
+    height: var(--tall-btn-height);
+}
+
+#calc-body {
+    width: var(--calc-body-width);
+    height: var(--calc-body-height);
+    padding: var(--calc-body-padding);
+    background-color: #141719;
+    border-radius: 5px;
+}
+
+#calc-display {
+    padding: 6px;
     border-style: solid;
-    border-color: #d7caed;
-    border-width: 4px;
+    border-color: black;
+    border-width: 6px;
+    border-radius: 5px;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 100px;
+    color: #0a0d0f;
+    background-color: #c4fffe;
+    height: var(--calc-display-height);
+}
+
+#calc-btn-container {
+    justify-content: center;
+    gap: var(--btn-gap);
+}
+
+#num-section {
+    align-items: flex-start;
+    width: var(--num-section-width);
+    gap: var(--btn-gap);
+}
+
+#num-section button {
+    background-color: #ffc2d0;
+}
+
+#num-section-top-row button{
+    background-color: #b9fdcd;
+}
+
+#op-section {
+    width: var(--op-section-width);
+    gap: var(--btn-gap);
+}
+
+#op-section button {
+    background-color: #ffe1b1;
+}
+
+.flex,
+.flex-col {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.num-section-row {
+    gap: var(--btn-gap);
 }

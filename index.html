@@ -4,36 +4,43 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Web Calculator</title>
         <link rel="stylesheet" href="style.css" />
     </head>
-    <body>
+    <body class="flex">
         <div id="calc-body">
-            calc-body
-            <div id="calc-display">1337</div>
-            <div id="calc-btn-container">
-                <div id="num-section">
-                    <div id="num-section-top-row">
+            <div id="calc-display" class="flex">1330</div>
+            <div id="calc-btn-container" class="flex">
+                <div id="num-section" class="flex-col">
+                    <div id="num-section-top-row" class="flex num-section-row">
                         <button id="ac-btn">AC</button>
                         <button id="divide-btn">/</button>
                         <button id="multiply-btn">*</button>
                     </div>
-                    <button id="7-btn">7</button>
-                    <button id="8-btn">8</button>
-                    <button id="9-btn">9</button>
-                    <button id="4-btn">4</button>
-                    <button id="5-btn">5</button>
-                    <button id="6-btn">6</button>
-                    <button id="1-btn">1</button>
-                    <button id="2-btn">2</button>
-                    <button id="3-btn">3</button>
-                    <button id="0-btn">0</button>
-                    <button id="dot-btn">.</button>
+                    <div id="btn-row-789" class="flex num-section-row">
+                        <button id="btn-7">7</button>
+                        <button id="btn-8">8</button>
+                        <button id="btn-9">9</button>
+                    </div>
+                    <div id="btn-row-456" class="flex num-section-row">
+                        <button id="btn-4">4</button>
+                        <button id="btn-5">5</button>
+                        <button id="btn-6">6</button>
+                    </div>
+                    <div id="btn-row-123" class="flex num-section-row">
+                        <button id="btn-1">1</button>
+                        <button id="btn-2">2</button>
+                        <button id="btn-3">3</button>
+                    </div>
+                    <div id="btn-row-0dot" class="flex num-section-row">
+                        <button id="btn-0">0</button>
+                        <button id="btn-dot">.</button>
+                    </div>
                 </div>
-                <div id="op-section">
-                    <button id="subtract-btn">-</button>
-                    <button id="add-btn">+</button>
-                    <button id="equals-btn">=</button>
+                <div id="op-section" class="flex-col">
+                    <button id="btn-subtract">-</button>
+                    <button id="btn-add">+</button>
+                    <button id="btn-equals">=</button>
                 </div>
             </div>
         </div>

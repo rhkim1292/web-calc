@@ -75,7 +75,12 @@ calcBtnContainer.addEventListener("click", (e) => {
         if (e.target.id === "btn-subtract") opMode = "-";
         if (e.target.id === "btn-multiply") opMode = "*";
         if (e.target.id === "btn-divide") opMode = "/";
-        if (e.target.id === "btn-equals") opMode = "=";
+        if (e.target.id === "btn-equals") {
+            if (opMode === "=") {
+                return;
+            }
+            opMode = "=";
+        }
 
         totalValue = limitDisplayDigits(totalValue);
 

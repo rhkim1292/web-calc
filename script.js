@@ -38,6 +38,11 @@ function operate(op, a, b) {
     }
 }
 
+function hasDecimal(calcDisplay) {
+    if (calcDisplay.indexOf(".") !== -1) return true;
+    return false;
+}
+
 function limitDisplayDigits(num) {
     let totalValueString = num.toString();
     return Number(totalValueString.substring(0, DISPLAY_CHAR_LIMIT));
@@ -55,6 +60,9 @@ calcBtnContainer.addEventListener("click", (e) => {
             clearDisplay = false;
             return;
         }
+        
+        if (e.target.id === "btn-dot" && hasDecimal(calcDisplay.textContent)) return;
+
         calcDisplay.textContent += e.target.textContent;
     }
 

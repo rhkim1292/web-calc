@@ -1,3 +1,12 @@
+const DISPLAY_CHAR_LIMIT = 9;
+const calcDisplay = document.querySelector("#calc-display");
+const calcBtnContainer = document.querySelector("#calc-btn-container");
+
+let totalValue = 0;
+let displayValue = Number(calcDisplay.textContent);
+let clearDisplay = false;
+let opMode = "";
+
 function add(a, b) {
     return a + b;
 }
@@ -29,13 +38,10 @@ function operate(op, a, b) {
     }
 }
 
-const calcDisplay = document.querySelector("#calc-display");
-const calcBtnContainer = document.querySelector("#calc-btn-container");
-
-let totalValue = 0;
-let displayValue = Number(calcDisplay.textContent);
-let clearDisplay = false;
-let opMode = "";
+function limitDisplayDigits(num) {
+    let totalValueString = num.toString();
+    return Number(totalValueString.substring(0, DISPLAY_CHAR_LIMIT));
+}
 
 calcBtnContainer.addEventListener("click", (e) => {
     if (e.target.nodeName !== "BUTTON") {
@@ -53,7 +59,9 @@ calcBtnContainer.addEventListener("click", (e) => {
     }
 
     if (e.target.className === "op-btn") {
-        totalValue === 0 ? totalValue = displayValue : totalValue = operate(opMode, totalValue, displayValue);
+        totalValue === 0
+            ? (totalValue = displayValue)
+            : (totalValue = operate(opMode, totalValue, displayValue));
 
         if (e.target.id === "btn-add") {
             opMode = "+";
@@ -70,6 +78,8 @@ calcBtnContainer.addEventListener("click", (e) => {
         if (e.target.id === "btn-equals") {
             opMode = "=";
         }
+
+        totalValue = limitDisplayDigits(totalValue);
 
         calcDisplay.textContent = totalValue;
         clearDisplay = true;

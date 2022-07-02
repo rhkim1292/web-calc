@@ -55,13 +55,16 @@ calcBtnContainer.addEventListener("click", (e) => {
 
     if (e.target.className === "num-btn") {
         if (calcDisplay.textContent === "0" || clearDisplay) {
-            calcDisplay.textContent = e.target.textContent;
+            e.target.id === "btn-dot"
+                ? (calcDisplay.textContent = "0.")
+                : (calcDisplay.textContent = e.target.textContent);
             displayValue = Number(calcDisplay.textContent);
             clearDisplay = false;
             return;
         }
-        
-        if (e.target.id === "btn-dot" && hasDecimal(calcDisplay.textContent)) return;
+
+        if (e.target.id === "btn-dot" && hasDecimal(calcDisplay.textContent))
+            return;
 
         calcDisplay.textContent += e.target.textContent;
     }

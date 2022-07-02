@@ -56,13 +56,17 @@ button {
     font-size: 30px;
 }
 
+i {
+    pointer-events: none;
+}
+
 #btn-0 {
     width: var(--wide-btn-width);
 }
 
-#btn-add {
+/* #btn-add {
     height: var(--tall-btn-height);
-}
+} */
 
 #btn-equals {
     height: var(--tall-btn-height);

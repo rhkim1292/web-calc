@@ -49,6 +49,7 @@ function limitDisplayDigits(num) {
 }
 
 calcBtnContainer.addEventListener("click", (e) => {
+    console.log(e.target.id);
     if (e.target.nodeName !== "BUTTON") {
         return;
     }
@@ -96,6 +97,14 @@ calcBtnContainer.addEventListener("click", (e) => {
     if (e.target.id === "btn-ac") {
         calcDisplay.textContent = "0";
         totalValue = 0;
+    }
+
+    if (e.target.id === "btn-backspace") {
+        if (calcDisplay.textContent.length === 1) {
+            calcDisplay.textContent = "0";
+            return;
+        }
+        calcDisplay.textContent = calcDisplay.textContent.substring(0, calcDisplay.textContent.length - 1);
     }
 
     displayValue = Number(calcDisplay.textContent);

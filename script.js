@@ -63,25 +63,17 @@ calcBtnContainer.addEventListener("click", (e) => {
             ? (totalValue = displayValue)
             : (totalValue = operate(opMode, totalValue, displayValue));
 
-        if (e.target.id === "btn-add") {
-            opMode = "+";
-        }
-        if (e.target.id === "btn-subtract") {
-            opMode = "-";
-        }
-        if (e.target.id === "btn-multiply") {
-            opMode = "*";
-        }
-        if (e.target.id === "btn-divide") {
-            opMode = "/";
-        }
-        if (e.target.id === "btn-equals") {
-            opMode = "=";
-        }
+        if (e.target.id === "btn-add") opMode = "+";
+        if (e.target.id === "btn-subtract") opMode = "-";
+        if (e.target.id === "btn-multiply") opMode = "*";
+        if (e.target.id === "btn-divide") opMode = "/";
+        if (e.target.id === "btn-equals") opMode = "=";
 
         totalValue = limitDisplayDigits(totalValue);
 
-        calcDisplay.textContent = totalValue;
+        totalValue === Infinity
+            ? (calcDisplay.textContent = "stop that")
+            : (calcDisplay.textContent = totalValue);
         clearDisplay = true;
     }
 

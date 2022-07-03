@@ -50,7 +50,7 @@ function limitDisplayDigits(num) {
 
 // Return true if display is in error state
 function checkForError() {
-    if (totalValue === Infinity || isNaN(totalValue)) {
+    if (Math.abs(totalValue) === Infinity || isNaN(totalValue)) {
         calcDisplay.textContent = "stop that";
         clearDisplay = true;
         opMode = "";
@@ -141,6 +141,7 @@ document.addEventListener("keydown", (e) => {
         if (e.key === "-") opMode = "-";
         if (e.key === "*") opMode = "*";
         if (e.key === "/") opMode = "/";
+        if (e.key === "=" || e.key === "Enter") opMode = "=";
 
         totalValue = Number(limitDisplayDigits(totalValue));
 
@@ -202,6 +203,7 @@ calcBtnContainer.addEventListener("click", (e) => {
         if (e.target.id === "btn-subtract") opMode = "-";
         if (e.target.id === "btn-multiply") opMode = "*";
         if (e.target.id === "btn-divide") opMode = "/";
+        if (e.target.id === "btn-equals") opMode = "=";
 
         totalValue = Number(limitDisplayDigits(totalValue));
 

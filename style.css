@@ -25,7 +25,7 @@
     --default-btn-height: calc(
         (
                 var(--calc-body-border-box-height) - var(--calc-display-height) -
-                    var(--vert-btn-gap-cnt) * var(--btn-gap)
+                    var(--btn-gap) - var(--vert-btn-gap-cnt) * var(--btn-gap)
             ) / var(--vert-btn-cnt)
     );
     --tall-btn-height: calc(var(--default-btn-height) * 2 + var(--btn-gap));
@@ -76,13 +76,18 @@ i {
     width: var(--calc-body-width);
     height: var(--calc-body-height);
     padding: var(--calc-body-padding);
+    display: flex;
+    flex-direction: column;
     background-color: #141719;
     border-radius: 5px;
+    gap: var(--btn-gap);
+    -webkit-box-shadow: 0px 0px 7px -1px #000000; 
+    box-shadow: 0px 0px 7px -1px #000000;
 }
 
 #calc-display {
     padding: 6px;
-    border-style: solid;
+    border-style: none;
     border-color: black;
     border-width: 6px;
     border-radius: 5px;

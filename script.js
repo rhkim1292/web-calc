@@ -45,7 +45,7 @@ function hasDecimal(calcDisplay) {
 
 function limitDisplayDigits(num) {
     let totalValueString = num.toString();
-    return Number(totalValueString.substring(0, DISPLAY_CHAR_LIMIT));
+    return totalValueString.substring(0, DISPLAY_CHAR_LIMIT);
 }
 
 // Return true if display is in error state
@@ -145,7 +145,7 @@ document.addEventListener("keydown", (e) => {
         if (e.key === "/") opMode = "/";
         if (e.key === "=" || e.key === "Enter") opMode = "=";
 
-        totalValue = limitDisplayDigits(totalValue);
+        totalValue = Number(limitDisplayDigits(totalValue));
 
         if (checkInfinity(totalValue, calcDisplay)) return;
 
@@ -209,7 +209,7 @@ calcBtnContainer.addEventListener("click", (e) => {
         if (e.target.id === "btn-divide") opMode = "/";
         if (e.target.id === "btn-equals") opMode = "=";
 
-        totalValue = limitDisplayDigits(totalValue);
+        totalValue = Number(limitDisplayDigits(totalValue));
 
         if (checkInfinity(totalValue, calcDisplay)) return;
 
@@ -234,4 +234,32 @@ calcBtnContainer.addEventListener("click", (e) => {
     }
 
     displayValue = Number(calcDisplay.textContent);
+});
+
+calcBtnContainer.addEventListener("mousedown", (e) => {
+    if (e.target.nodeName !== "BUTTON") {
+        return;
+    }
+    e.target.style.filter = "brightness(85%)";
+});
+
+calcBtnContainer.addEventListener("mouseup", (e) => {
+    if (e.target.nodeName !== "BUTTON") {
+        return;
+    }
+    e.target.style.filter = "brightness(110%)";
+});
+
+calcBtnContainer.addEventListener("mouseout", (e) => {
+    if (e.target.nodeName !== "BUTTON") {
+        return;
+    }
+    e.target.style.filter = "brightness(100%)";
+});
+
+calcBtnContainer.addEventListener("mouseover", (e) => {
+    if (e.target.nodeName !== "BUTTON") {
+        return;
+    }
+    e.target.style.filter = "brightness(110%)";
 });

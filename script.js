@@ -49,10 +49,11 @@ function limitDisplayDigits(num) {
 }
 
 // Return true if display is in error state
-function checkInfinity(totalValue, calcDisplay) {
-    if (totalValue === Infinity) {
+function checkForError() {
+    if (totalValue === Infinity || isNaN(totalValue)) {
         calcDisplay.textContent = "stop that";
         clearDisplay = true;
+        opMode = "";
         return true;
     } else {
         calcDisplay.textContent = totalValue;
@@ -118,7 +119,7 @@ document.addEventListener("keydown", (e) => {
         if (
             calcDisplay.textContent === "0" ||
             clearDisplay ||
-            calcDisplay.textContent === "stop that"
+            isNaN(Number(calcDisplay.textContent))
         ) {
             e.key === "."
                 ? (calcDisplay.textContent = "0.")
@@ -135,19 +136,15 @@ document.addEventListener("keydown", (e) => {
     }
 
     if (isOpKey(e.key)) {
-        totalValue === 0
-            ? (totalValue = displayValue)
-            : (totalValue = operate(opMode, totalValue, displayValue));
-
+        totalValue = operate(opMode, totalValue, displayValue);
         if (e.key === "+") opMode = "+";
         if (e.key === "-") opMode = "-";
         if (e.key === "*") opMode = "*";
         if (e.key === "/") opMode = "/";
-        if (e.key === "=" || e.key === "Enter") opMode = "=";
 
         totalValue = Number(limitDisplayDigits(totalValue));
 
-        if (checkInfinity(totalValue, calcDisplay)) return;
+        if (checkForError()) return;
 
         checkClearDisplay();
     }
@@ -155,11 +152,13 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
         calcDisplay.textContent = "0";
         totalValue = 0;
+        opMode = "";
     }
 
     if (e.key === "Backspace") {
         if (calcDisplay.textContent.length === 1) {
             calcDisplay.textContent = "0";
+            displayValue = Number(calcDisplay.textContent);
             return;
         }
         clearDisplay = false;
@@ -181,7 +180,7 @@ calcBtnContainer.addEventListener("click", (e) => {
         if (
             calcDisplay.textContent === "0" ||
             clearDisplay ||
-            calcDisplay.textContent === "stop that"
+            isNaN(Number(calcDisplay.textContent))
         ) {
             e.target.id === "btn-dot"
                 ? (calcDisplay.textContent = "0.")
@@ -191,27 +190,22 @@ calcBtnContainer.addEventListener("click", (e) => {
             return;
         }
 
-        if (e.target.id === "btn-dot" && hasDecimal(calcDisplay.textContent))
-            return;
+        if (e.target.id === "btn-dot" && hasDecimal(calcDisplay.textContent)) return;
 
         calcDisplay.textContent += e.target.textContent;
         calcDisplay.textContent = limitDisplayDigits(calcDisplay.textContent);
     }
 
     if (e.target.className === "op-btn") {
-        totalValue === 0
-            ? (totalValue = displayValue)
-            : (totalValue = operate(opMode, totalValue, displayValue));
-
+        totalValue = operate(opMode, totalValue, displayValue);
         if (e.target.id === "btn-add") opMode = "+";
         if (e.target.id === "btn-subtract") opMode = "-";
         if (e.target.id === "btn-multiply") opMode = "*";
         if (e.target.id === "btn-divide") opMode = "/";
-        if (e.target.id === "btn-equals") opMode = "=";
 
         totalValue = Number(limitDisplayDigits(totalValue));
 
-        if (checkInfinity(totalValue, calcDisplay)) return;
+        if (checkForError()) return;
 
         checkClearDisplay();
     }
@@ -219,11 +213,13 @@ calcBtnContainer.addEventListener("click", (e) => {
     if (e.target.id === "btn-ac") {
         calcDisplay.textContent = "0";
         totalValue = 0;
+        opMode = "";
     }
 
     if (e.target.id === "btn-backspace") {
         if (calcDisplay.textContent.length === 1) {
             calcDisplay.textContent = "0";
+            displayValue = Number(calcDisplay.textContent);
             return;
         }
         clearDisplay = false;
